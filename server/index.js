@@ -13,10 +13,10 @@ app.use(express.static('public'));
 //   }
 // })
 
-app.use('/json_placeholder', createProxyMiddleware({
-  target: "https://jsonplaceholder.typicode.com",
+app.use('/shoe', createProxyMiddleware({
+  target: "http://localhost:3000//api/shoes/18/reviews",
   pathRewrite: {
-    [`^/json_placeholder`]: '',
+    [`^/shoe`]: '',
   },
 }));
 
@@ -24,10 +24,7 @@ app.listen(PORT, () => {
   console.log('listening on port ' + PORT);
 })
 
-app.get('/info', (req, res, next) => {
-  res.send('this is my proxy service');
-})
-
+//curl localhost:4000/shoe
 
 // app.get('/api/shoes/:shoeId/reviews', (req, res) => {
 //   let item = req.params.shoeId;
