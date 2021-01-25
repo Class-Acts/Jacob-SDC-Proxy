@@ -1,13 +1,32 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 app.use(express.static('public'));
+
+// app.use('', (req, res, next) => {
+//   if (req.headers.authorization) {
+//     next();
+//   } else {
+//     res.sendStatus(403);
+//   }
+// })
+
+app.use('/json_placeholder', createProxyMiddleware({
+  target: "https://jsonplaceholder.typicode.com",
+  pathRewrite: {
+    [`^/json_placeholder`]: '',
+  },
+}));
 
 app.listen(PORT, () => {
   console.log('listening on port ' + PORT);
 })
 
+app.get('/info', (req, res, next) => {
+  res.send('this is my proxy service');
+})
 
 
 // app.get('/api/shoes/:shoeId/reviews', (req, res) => {
