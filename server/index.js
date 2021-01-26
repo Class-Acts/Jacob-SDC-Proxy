@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 4000;
-const { createProxyMiddleware } = require('http-proxy-middleware');
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
 app.use(express.static('public'));
 
@@ -13,12 +13,12 @@ app.use(express.static('public'));
 //   }
 // })
 
-app.use('/shoe', createProxyMiddleware({
-  target: "http://localhost:3000//api/shoes/18/reviews",
-  pathRewrite: {
-    [`^/shoe`]: '',
-  },
-}));
+// app.use('api/shoes/38/reviews', createProxyMiddleware({
+//   target: "http://localhost:3000//api/shoes/18/reviews",
+//   pathRewrite: {
+//     [`^/shoe`]: '',
+//   },
+// }));
 
 app.listen(PORT, () => {
   console.log('listening on port ' + PORT);
